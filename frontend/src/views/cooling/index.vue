@@ -8,6 +8,9 @@
       <div class="page-actions">
         <button class="btn primary" type="button" @click="openCreate">登记供水系统</button>
         <button class="btn" type="button" @click="exportRows">导出技术供水清单</button>
+        <button class="btn ghost" type="button" @click="dutyOpen = !dutyOpen">
+          {{ dutyOpen ? '收起值班台账' : `技术供水值班台账（${dutyCount} 条）` }}
+        </button>
       </div>
     </header>
 
@@ -64,9 +67,13 @@
     </table>
 
     <footer class="page-foot">
-      <span>共 {{ total }} 条技术供水记录</span>
+      <span>共 {{ total }} 条技术供水记录；值班台账 {{ dutyCount }} 条，与「值班台账」入口条数一致</span>
       <span v-if="errorMessage" class="error-text">{{ errorMessage }}</span>
     </footer>
+
+    <div v-if="dutyOpen" class="duty-entry">
+      <DutyLedgerPanel ref="dutyPanel" />
+    </div>
   </section>
 </template>
 
@@ -79,7 +86,13 @@ import {
   moduleMeta,
   runAction as applyAction,
 } from '@/api/local-service'
+import DutyLedgerPanel from '@/components/DutyLedgerPanel.vue'
+import { currentDutyCount } from '@/data/duty-store'
 import type { EntryRow } from '@/data/types'
+
+const dutyPanel = ref<InstanceType<typeof DutyLedgerPanel> | null>(null)
+const dutyOpen = ref(false)
+const dutyCount = ref(currentDutyCount())
 
 const meta = moduleMeta('cooling')
 const columns = ["系统编号", "供水类型", "供水压力", "供水流量", "水温数值", "滤水器压差", "检查日期", "系统状态"]
@@ -128,6 +141,8 @@ function reload() {
     const payload = listEntries(meta.key, filters.value)
     rows.value = payload.items
     total.value = payload.total
+    dutyCount.value = currentDutyCount()
+    dutyPanel.value?.refresh()
   } catch (error) {
     errorMessage.value = error instanceof Error ? error.message : '技术供水列表读取失败'
   }

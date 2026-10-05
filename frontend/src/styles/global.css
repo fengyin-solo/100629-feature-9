@@ -35,3 +35,28 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.crew-switch { margin-left: 12px; }
+.crew-switch select { margin-left: 4px; padding: 2px 4px; }
+.col-check { width: 36px; text-align: center; }
+.over-limit { color: #b42318; font-weight: 600; }
+.hidden-input { display: none; }
+.tag { display: inline-block; border-radius: 999px; padding: 1px 8px; font-size: 12px; margin-left: 4px; white-space: nowrap; }
+.tag-pending { background: #fef3c7; color: #92400e; }
+.tag-warn { background: #ffedd5; color: #9a3412; }
+.tag-danger { background: #fee2e2; color: #b42318; }
+.tag-ok { background: #dcfce7; color: #166534; }
+.tag-muted { background: #e2e8f0; color: #475569; }
+.modal-mask { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55); display: flex; align-items: center; justify-content: center; z-index: 20; padding: 24px; }
+.modal { background: #fff; border-radius: 10px; width: min(900px, 100%); max-height: 88vh; overflow: auto; padding: 16px 18px; box-shadow: 0 18px 50px rgba(15, 23, 42, 0.35); }
+.modal-wide { width: min(1080px, 100%); }
+.modal-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.modal-head h3 { margin: 0; font-size: 15px; }
+.modal-tip { font-size: 12px; color: var(--muted); margin: 0 0 10px; }
+.modal-foot { display: flex; justify-content: flex-end; gap: 8px; margin-top: 12px; }
+.reason-cell { min-width: 260px; color: #334155; }
+.duty-entry { margin-top: 18px; border-top: 2px dashed var(--border); padding-top: 12px; }
+.duty-panel h3 { font-size: 14px; margin: 14px 0 8px; }
+.history-box { margin-top: 14px; font-size: 13px; }
+.history-box summary { cursor: pointer; color: var(--brand); margin-bottom: 8px; }
+.modal input[type='text'], .modal input:not([type]), .data-table input { width: 100%; padding: 4px 6px; border: 1px solid var(--border); border-radius: 4px; }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; }
