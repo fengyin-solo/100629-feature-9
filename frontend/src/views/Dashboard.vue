@@ -38,14 +38,20 @@
 import { onMounted, ref } from 'vue'
 
 import { loadOverview } from '@/api/local-service'
+import { pendingInspectionCount } from '@/api/inspection-service'
 import type { OverviewResult } from '@/data/types'
 
 const cards = ref<OverviewResult['cards']>([])
 const moduleRows = ref<OverviewResult['modules']>([])
+const excitationPending = ref(0)
 
 function refresh() {
   const payload = loadOverview()
-  cards.value = payload.cards
+  excitationPending.value = pendingInspectionCount()
+  cards.value = [
+    ...payload.cards,
+    { label: '励磁待检查装置', value: excitationPending.value },
+  ]
   moduleRows.value = payload.modules
 }
 
